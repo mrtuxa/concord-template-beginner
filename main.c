@@ -1,5 +1,6 @@
 #include <string.h>
 #include <concord/discord.h>
+#include <concord/log.h>
 #include "main.h" 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,13 +8,41 @@
 #include <time.h>
 
 void on_ready(struct discord *client, const struct discord_ready *event) {
-    struct discord_create_guild_application_command params = {
+    printf("Ready");
+}
+
+void register_application_commands(struct discord *client, const struct discord_ready *event) {
+     struct discord_create_guild_application_command params = {
         .name = "ping",
         .description = "Ping command!"
     };
     discord_create_guild_application_command(client, event->application->id,
                                              GUILD_ID, &params, NULL);
 }
+
+void set_presence(struct discord *client, const struct discord_ready *event) {
+
+    struct discord_activity activities[] = {
+        {
+            .name = "with Concord",
+            .type = DISCORD_ACTIVITY_GAME
+        },
+    };
+
+    struct discord_presence_update status = {
+        .activities =
+            &(struct discord_activities){
+                .size = sizeof(activities) / sizeof *activities,
+                .array = activities,
+            },
+        .status = "idle",
+        .afk = false,
+        .since = discord_timestamp(client),
+    };
+
+    discord_update_presence(client, &status);
+}
+
  
 void on_interaction(struct discord *client, const struct discord_interaction *event) {
     if (event->type != DISCORD_INTERACTION_APPLICATION_COMMAND)
@@ -117,9 +146,11 @@ void on_spam_sync(struct discord *client, const struct discord_message *event) {
 int main(void) {
     struct discord *client = discord_init(TOKEN);
     discord_set_on_ready(client, &on_ready);
+    discord_set_on_ready(client, &register_application_commands);
+    discord_set_on_ready(client, &set_presence);
     discord_set_on_interaction_create(client, &on_interaction);
     discord_set_on_command(client, ">8ball", &eight_ball);
-      discord_set_on_command(client, ">spam-async", &on_spam_async);
+    discord_set_on_command(client, ">spam-async", &on_spam_async);
     discord_set_on_command(client, ">spam-sync", &on_spam_sync);
     discord_add_intents(client, INTENTS_ALL);
     discord_run(client);
