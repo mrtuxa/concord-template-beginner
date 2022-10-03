@@ -1,0 +1,25 @@
+HTTP_SEND_GET [USER_AGENT] - 2022-10-3T20:16:33.821Z - https://discord.com/api/v10/gateway/bot
+User-Agent: Cogmasters (https://github.com/Cogmasters)
+Authorization: Bot (null)
+
+@@@_1_@@@
+HTTP_RCV_UNAUTHORIZED(401) [USER_AGENT] - 2022-10-3T20:16:34.063Z - https://discord.com/api/v10/gateway/bot
+date: Mon, 03 Oct 2022 19:16:34 GMT
+content-type: application/json
+content-length: 43
+set-cookie: __dcfduid=e4ee81c4434f11ed9b0cd64648d66cbf; Expires=Sat, 02-Oct-2027 19:16:34 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+x-envoy-upstream-service-time: 15
+via: 1.1 google
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+cf-cache-status: DYNAMIC
+report-to: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=TTNqH0hZ14wwMfI%2F0opjeSqbELVjuCTbz7gX91aP1VvsU6bCgdmlnZIkYBWSQrR0riZFvihraJPYRxOc7k6yM89Tg6TUKKuLa3XqJzRa40hQNLFSNqALMY8sT%2FAS"}],"group":"cf-nel","max_age":604800}
+nel: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+x-content-type-options: nosniff
+set-cookie: __sdcfduid=e4ee81c4434f11ed9b0cd64648d66cbf8c8d5981e3b647b0751fb98e769fd31ea131d6542cb0f1bce4005fa8368a3d7b; Expires=Sat, 02-Oct-2027 19:16:34 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/
+set-cookie: __cfruid=a44cb9eec724b954ceeec586d83d0ca28ed66c78-1664824594; path=/; domain=.discord.com; HttpOnly; Secure; SameSite=None
+server: cloudflare
+cf-ray: 7548035059ee58f0-TXL
+
+{"message": "401: Unauthorized", "code": 0}
+@@@_2_@@@
